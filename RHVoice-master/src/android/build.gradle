@@ -1,0 +1,42 @@
+buildscript {
+repositories {
+google()
+jcenter()
+    }
+dependencies {
+classpath 'com.android.tools.build:gradle:3.1.2'
+    }
+}
+
+allprojects {
+repositories {
+google()
+jcenter()
+    }
+
+ext.myMinSdkVersion=14
+ext.myCompileSdkVersion=27
+ext.myTargetSdkVersion=27
+}
+
+if(!hasProperty('androidBuildToolsVersion')) {
+ext.androidBuildToolsVersion='27.0.3'
+}
+
+if(hasProperty("signRelease")) {
+ext.signRelease=Boolean.parseBoolean(signRelease)
+}
+else {
+ext.signRelease=false
+}
+
+if(hasProperty("signDebug")) {
+ext.signDebug=Boolean.parseBoolean(signDebug)
+}
+else {
+ext.signDebug=false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
